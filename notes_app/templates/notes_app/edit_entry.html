@@ -1,0 +1,54 @@
+{% extends 'notes_app/base.html' %}
+
+{% block content %}
+<div class="entry-form-container">
+    <h2>Edit Entry</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-section">
+            <h3>Entry Content</h3>
+            {{ form.content.label_tag }}
+            {{ form.content }}
+        </div>
+
+        <div class="form-section">
+            <h3>Tags</h3>
+            <label for="id_tags">Tags:</label>
+            <input type="text" name="tags" id="id_tags" value="{{ entry.tags.all|join:', ' }}" />
+            <span class="help-text">Enter tags separated by commas</span>
+        </div>
+
+        <div class="form-section">
+            <h3>Upload Images</h3>
+            {{ formset_images.management_form }}
+            {% for form in formset_images %}
+                <div class="image-form">
+                    {{ form.image.label_tag }}
+                    {{ form.image }}
+                    {% if form.instance.pk %}  <!-- Display delete checkbox only for existing images -->
+                        {{ form.DELETE.label_tag }}
+                        {{ form.DELETE }} <!-- checkbox for delete -->
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="form-section">
+            <h3>Add Links</h3>
+            {{ formset_links.management_form }}
+            {% for form in formset_links %}
+                <div class="link-form">
+                    {{ form.url.label_tag }}
+                    {{ form.url }}
+                    {% if form.instance.pk %}  <!-- Display delete checkbox only for existing links -->
+                        {{ form.DELETE.label_tag }}
+                        {{ form.DELETE }} <!-- checkbox for delete -->
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="submit-btn">Save Entry</button>
+    </form>
+</div>
+{% endblock %}

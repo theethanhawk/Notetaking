@@ -1,0 +1,15 @@
+{% extends 'notes_app/base.html' %}
+
+{% block content %}
+<div class="search-results-container">
+    <h2>Search Results for "{{ query }}"</h2>
+    {% for entry in entries %}
+        <div class="entry-detail-container">
+            <h3><a href="{% url 'notes_app:entry_detail' pk=entry.pk %}">{{ entry.content|truncatechars:100 }}</a></h3>
+            <!-- Add more details such as tags, etc. -->
+        </div>
+    {% empty %}
+        <p>No entries found for "{{ query }}".</p>
+    {% endfor %}
+</div>
+{% endblock %}

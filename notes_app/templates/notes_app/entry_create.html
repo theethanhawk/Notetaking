@@ -1,0 +1,52 @@
+{% extends 'notes_app/base.html' %}
+
+{% block content %}
+<div class="entry-form-container">
+    <h2>Create New Entry</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-section">
+            <h3>Entry Content</h3>
+            {{ form.content.label_tag }}
+            {{ form.content }}
+        </div>
+
+        <div class="form-section">
+            <h3>Tags</h3>
+            {{ form.tag_names.label_tag }}
+            {{ form.tag_names }}
+            <span class="help-text">Enter tags separated by commas</span>
+        </div>
+
+        <div class="form-section">
+            <h3>Upload Images</h3>
+            {{ formset_images.management_form }}
+            {% for form in formset_images %}
+                <div class="image-form">
+                    {{ form.image.label_tag }}
+                    {{ form.image }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="form-section">
+            <h3>Add Links</h3>
+            {{ formset_links.management_form }}
+            {% for form in formset_links %}
+                <div class="link-form">
+                    {{ form.url.label_tag }}
+                    {{ form.url }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="submit-btn">Save Entry</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+// You can add JavaScript here to dynamically add more image or link forms, if needed.
+</script>
+{% endblock %}

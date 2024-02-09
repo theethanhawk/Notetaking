@@ -1,0 +1,36 @@
+{% extends 'notes_app/base.html' %}
+
+{% block content %}
+    <div class="entry-detail-container">
+        <div class="entry-content preformatted-text">
+            {{ entry.content }}
+        </div>
+
+        <div class="entry-tags">
+            <ul>
+                {% for tag in entry.tags.all %}
+                    <li>{{ tag.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="entry-images">
+            {% for image in entry.images.all %}
+                <div class="image">
+                    <img src="{{ image.image.url }}" alt="Image for Entry {{ entry.id }}" style="width: 300px; height: auto;">
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="entry-links">
+            <ul>
+                {% for link in entry.links.all %}
+                    <li><a href="{{ link.url }}" target="_blank">{{ link.url }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="entry-actions">
+        </div>
+    </div>
+{% endblock %}

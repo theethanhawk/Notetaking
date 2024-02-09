@@ -1,0 +1,24 @@
+{% extends 'notes_app/base.html' %}
+
+
+{% block content %}
+<div class="grid-container">
+    <h2>All Entries</h2>
+    {% for entry in entries %}
+        <div class="entry-detail-container">
+            <h3><a href="{% url 'notes_app:entry_detail' pk=entry.pk %}">{{ entry.content|truncatechars:100 }}</a></h3>
+            <div class="entry-tags">
+                <h4>Tags</h4>
+                <ul>
+                    {% for tag in entry.tags.all %}
+                        <li>{{ tag.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <a href="{% url 'notes_app:entry_detail' pk=entry.pk %}" class="entry-links">Read More...</a>
+        </div>
+    {% empty %}
+        <p>No entries found.</p>
+    {% endfor %}
+</div>
+{% endblock %}

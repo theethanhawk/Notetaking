@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Django App{% endblock title %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="{% url 'notes_app:home' %}" class="navbar-brand">Notes App</a>
+            <div class="navbar-nav">
+                <a href="{% url 'notes_app:home' %}" class="nav-item">Home</a>
+                <a href="{% url 'notes_app:entry_create' %}" class="nav-item">New Entry</a>
+                <!--Search bar, functional, improve design-->
+                <div class="nav-item search-container">
+                    <form action="{% url 'notes_app:search_results' %}" method="get">
+                        <input type="text" name="query" placeholder="Search entries...">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+                <!--Profile section of navbar, still requires backend, html-->
+                <div class="nav-item profile-container">
+                    <div class="profile-icon">
+                        <!-- Placeholder for profile image; you can replace it with an actual image later -->
+                        <img src="{% static 'images/profile-icon.png' %}" alt="Profile">
+                    </div>
+                    <!--add JavaScript to make this dropdown interactive-->
+                    <div class="profile-dropdown">
+                        <a href="{% url 'notes_app:profile' %}">Profile</a>
+                        <a>Settings</a>
+                        {% if user.is_authenticated %}
+                            Hello, {{ user.username }}!
+                            <form action="{% url 'users:logout' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit">Log out</button>
+                            </form>
+                        {% else %}
+                            <a href="{% url 'users:register' %}">Register</a>
+                            <a href="{% url 'users:login' %}">Log in</a>
+                        {% endif %}
+                        <!-- Add more profile-related links here -->
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    {% block content %}
+    <!-- Default content goes here -->
+    {% endblock content %}
+</body>
+</html>

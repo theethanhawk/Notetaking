@@ -2,6 +2,15 @@
 
 
 {% block content %}
+<div class="filter-form-container">
+    <div class="filter-form">
+        <form method="get">
+            {{ filter_form.as_p }}
+            <button type="submit" class="filter-btn">Filter</button>
+        </form>
+    </div>
+</div>
+
 <div class="grid-container">
     <h2>All Entries</h2>
     {% for entry in entries %}

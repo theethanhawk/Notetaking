@@ -3,11 +3,7 @@ from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
 
 
-# User Profile models
-
-
-
-# Entry related models here.    
+# Entry related models
 
 class Tag(models.Model):
     """Tag for categorizing entries"""
@@ -15,11 +11,11 @@ class Tag(models.Model):
 
     def __str__(self):
         """Returns a string representation of the tag"""
-        return f"#{self.name}"
+        return f"{self.name}"
     
 
 class Entry(models.Model):
-    """Entry within a specific Topic"""
+    """Entry object displaying portion of content along with tags"""
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
@@ -35,19 +31,21 @@ class Entry(models.Model):
     
 
 class Image(models.Model):
+    """Simple image containing model related to entry through foreign key"""
     entry = models.ForeignKey(Entry, related_name='images', on_delete=models.CASCADE)
+    # image field does not work for all image types, this needs updating
+    # in settings directs to upload to notetaking/media/images/
     image = models.ImageField(
         upload_to='images/',
         validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif', 'xml'])],
-        # As of right now not all image types work, might be due to size or type, update pending
-        # Consider building a script that converts images to the appropriate file type or a similar method
-        # For now any file that does not work I use the snip tool to convert, but this is a cheap workaround
     )
 
     def __str__(self):
         return f'Image {self.id} for Entry {self.entry.id}'
 
+
 class Link(models.Model):
+    """Simple model with one field for adding a url, related to entry through foreign key"""
     entry = models.ForeignKey(Entry, related_name='links', on_delete=models.CASCADE)
     url = models.URLField()
 

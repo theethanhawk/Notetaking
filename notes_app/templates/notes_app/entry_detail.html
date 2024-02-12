@@ -30,7 +30,6 @@
             </ul>
         </div>
 
-        <div class="entry-actions">
-        </div>
+        <a href="{% url 'notes_app:entry_delete' pk=entry.pk %}" class="btn btn-danger">Delete Entry</a>
     </div>
 {% endblock %}

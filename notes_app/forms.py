@@ -1,5 +1,5 @@
 from django import forms
-from .models import Entry, Tag, Image, Link
+from .models import Entry, Tag, Image, Link, UserProfile
 
 
 # Custom models.py related forms
@@ -28,6 +28,7 @@ class LinkForm(forms.ModelForm):
 
 
 class EntryFilterForm(forms.Form):
+    """This form helps me filter entries on the home page"""
     tag = forms.ModelChoiceField(
         queryset=Tag.objects.all(),
         required=False,
@@ -36,3 +37,12 @@ class EntryFilterForm(forms.Form):
     )
     start_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
     end_date = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['profile_image', 'theme_preference']
+        widgets = {
+            'theme_preference': forms.Select(attrs={'id':'id_theme_preference'}),
+        }

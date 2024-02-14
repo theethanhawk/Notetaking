@@ -6,5 +6,10 @@
     <!-- Profile information here -->
     <p>Welcome, {{ user.username }}</p>
     <!-- Add more user information here -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
 </div>
 {% endblock %}

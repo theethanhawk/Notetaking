@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     #myApps
     'notes_app',
     'users',
+    'django_bootstrap5',
 
     #defaultApps
     'django.contrib.admin',

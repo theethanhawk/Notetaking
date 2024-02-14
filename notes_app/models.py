@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
 
-
 # Entry related models
 
 class Tag(models.Model):
@@ -51,4 +50,19 @@ class Link(models.Model):
 
     def __str__(self):
         return f'Link {self.id} for Entry {self.entry.id}'
+    
+    
+class UserProfile(models.Model):
+    DARK = 'dark'
+    LIGHT = 'light'
+    THEME_CHOICES = [
+        (DARK, 'Dark'),
+        (LIGHT, 'Light'),
+    ]
+    theme_preference = models.CharField(max_length=5, choices=THEME_CHOICES, default=LIGHT)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
     

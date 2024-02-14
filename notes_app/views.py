@@ -6,13 +6,20 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
 from .models import Entry, Tag, Image, Link
-from .forms import EntryForm, EntryFilterForm
+from .forms import EntryForm, EntryFilterForm, UserProfileForm
 
 
 @login_required
 def profile(request):
-    """Handles rendering profile information"""
-    return render(request, 'notes_app/profile.html')
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=request.user.userprofile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=request.user.userprofile)
+    
+    return render(request, 'notes_app/profile.html', {'form': form})
 
 
 def home(request):

@@ -2,6 +2,7 @@
 
 
 {% block content %}
+<!-- FILTER FUNCTION -->
 <div class="filter-form-container">
     <div class="filter-form">
         <form method="get">
@@ -11,8 +12,8 @@
     </div>
 </div>
 
+<!-- LOOP Displaying all entries with Home view function -->
 <div class="grid-container">
-    <h2>All Entries</h2>
     {% for entry in entries %}
         <div class="entry-detail-container">
             <h3><a href="{% url 'notes_app:entry_detail' pk=entry.pk %}">{{ entry.content|truncatechars:100 }}</a></h3>

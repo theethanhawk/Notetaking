@@ -6,6 +6,8 @@
         <p>Your username and password didn't match and you have been throttled, try again.</p>
     {% endif %}
 
+    <p>If you do not have an account register your account <a href="{% url 'users:register' %}">here</a></p>
+
     <form method="post" action="{% url 'users:login' %}">
         {% csrf_token %}
         {{ form.as_p }}

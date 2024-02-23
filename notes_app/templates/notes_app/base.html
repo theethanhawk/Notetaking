@@ -6,15 +6,27 @@
     {% load static %}
     {% load django_bootstrap5 %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="nav-left">
-                <!-- Profile section -->
+                <!-- Notetaking Hub link -->
+                <a href="{% url 'notes_app:home' %}" class="nav-item">Home</a>
+            </div>
+            <div class="nav-center" >
+                <form action="{% url 'notes_app:search_results' %}" method="get">
+                    <input type="text" name="query" placeholder="Search entries...">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+            <div class="nav-right">
                 <div class="profile-container">
-                    <div class="profile-icon">
-                        <img src="{% static 'images/profile-icon.png' %}" alt="Profile">
+                    <!-- Profile section -->
+                    <div class="profile-icon" id="hamburger_icon">
+                        <!-- Assume hamburger-icon.png is correctly placed in your static files -->
+                        <img src="{% static 'images/hamburger_icon.png' %}" alt="Menu">
                     </div>
                     <div class="profile-dropdown">
                         <a href="{% url 'notes_app:profile' %}" class="nav-item">Profile</a>
@@ -32,19 +44,6 @@
                         {% endif %}
                         <!-- Add more profile-related links here -->
                     </div>
-                </div>
-            </div>
-            <div class="nav-center">
-                <!-- Notetaking Hub link -->
-                <a href="{% url 'notes_app:home' %}" class="nav-item">Home</a>
-            </div>
-            <div class="nav-right">
-                <!-- Search bar -->
-                <div class="search-container">
-                    <form action="{% url 'notes_app:search_results' %}" method="get">
-                        <input type="text" name="query" placeholder="Search entries...">
-                        <button type="submit">Search</button>
-                    </form>
                 </div>
             </div>
         </nav>

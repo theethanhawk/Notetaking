@@ -11,19 +11,23 @@ from .forms import EntryForm, EntryFilterForm, UserProfileForm
 
 @login_required
 def profile(request):
-    if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES, instance=request.user.userprofile)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')
-    else:
-        form = UserProfileForm(instance=request.user.userprofile)
+    # if request.method == 'POST':
+    #     form = UserProfileForm(request.POST, request.FILES, instance=request.user.userprofile)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('notes_app:profile')
+    # else:
+    #     form = UserProfileForm(instance=request.user.userprofile)
     
-    return render(request, 'notes_app/profile.html', {'form': form})
+    return render(request, 'notes_app/profile.html') #{'form': form}
 
 
 def home(request):
-    """Displayed home page for user w/ all of that users entries as well as filter funtionality""" 
+    """Displayed home page for user w/ all of that users entries as well as filter funtionality"""
+    if not request.user.is_authenticated:
+        # Redirect the user to the login page
+        return redirect('users:login')
+    
     form = EntryFilterForm(request.GET)
     entries = Entry.objects.filter(owner=request.user).order_by('-created_date')
 

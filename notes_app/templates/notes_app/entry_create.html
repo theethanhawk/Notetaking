@@ -1,9 +1,9 @@
 {% extends 'notes_app/base.html' %}
 
 {% block content %}
-<div class="entry-form-container">
-    <h2>Create New Entry</h2>
+<div class="form-container">
     <form method="post" enctype="multipart/form-data">
+        <h2>Create New Entry</h2>
         {% csrf_token %}
         <div class="form-section">
             <h3>Entry Content</h3>

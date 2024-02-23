@@ -31,5 +31,6 @@
         </div>
 
         <a href="{% url 'notes_app:entry_delete' pk=entry.pk %}" class="btn btn-danger">Delete Entry</a>
+        <a href="{% url 'notes_app:edit_entry' pk=entry.pk %}">Edit Entry</a>
     </div>
 {% endblock %}

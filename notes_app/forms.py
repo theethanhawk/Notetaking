@@ -30,7 +30,7 @@ class LinkForm(forms.ModelForm):
 class EntryFilterForm(forms.Form):
     """This form helps me filter entries on the home page"""
     tag = forms.ModelChoiceField(
-        queryset=Tag.objects.all(),
+        queryset=Tag.objects.all().order_by('name'),
         required=False,
         label='Tag',
         empty_label="Select a tag"

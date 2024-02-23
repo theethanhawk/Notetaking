@@ -2,12 +2,34 @@
 
 
 {% block content %}
-<!-- FILTER FUNCTION -->
-<div class="filter-form-container">
-    <div class="filter-form">
+{% load static %}
+<div class="photo-section">
+    <img src="{% static 'images/philosophers.jpg' %}" alt="Featured Image">
+    <a href="{% url 'notes_app:entry_create' %}" class="add-entry-btn">New Entry</a>
+</div>
+<!-- FILTER FUNCTION and NEW ENTRY -->
+<div class="new-filter-search">
+    <!-- <div class="filter-form-dropdown">
         <form method="get">
             {{ filter_form.as_p }}
             <button type="submit" class="filter-btn">Filter</button>
+        </form>
+    </div> -->
+    <div class="filter-form-dropdown">
+        <form method="get" class="filter-form">
+            <div class="form-group">
+                <label for="id_tag">Tag</label>
+                {{ filter_form.tag }}
+            </div>
+            <div class="form-group">
+                <label for="id_start_date">Start Date</label>
+                {{ filter_form.start_date }}
+            </div>
+            <div class="form-group">
+                <label for="id_end_date">End Date</label>
+                {{ filter_form.end_date }}
+            </div>
+            <button type="submit" class="filter-form">Filter</button>
         </form>
     </div>
 </div>

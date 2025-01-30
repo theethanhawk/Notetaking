@@ -51,7 +51,7 @@ def entry_detail(request, pk):
 
 @login_required
 def entry_create(request):
-    """Renders forms with infline formsets and saves forms to create an Entry object"""
+    """Renders forms with inline formsets and saves forms to create an Entry object"""
     image_formset = inlineformset_factory(Entry, Image, fields=["image"], extra=1)
     link_formset = inlineformset_factory(Entry, Link, fields=["url"], extra=1)
 
@@ -105,7 +105,7 @@ def edit_entry(request, pk):
 
     if request.method == 'POST':
         # print state helps me see what is happening at the post, helps me debug
-        print(request.POST)
+        # print(request.POST)
         form = EntryForm(request.POST, instance=entry)
         formset_images = image_formset(request.POST, request.FILES, instance=entry)
         formset_links = link_formset(request.POST, instance=entry)

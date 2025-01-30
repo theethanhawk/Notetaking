@@ -2,7 +2,6 @@
 
 {% block content %}
 <div class="entry-form-container">
-    <h2>Edit Entry</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-section">
@@ -47,8 +46,9 @@
                 </div>
             {% endfor %}
         </div>
-
-        <button type="submit" class="submit-btn">Save Entry</button>
+        <div class="form-section">
+            <button type="submit" class="submit-btn">Save Entry</button>
+        </div>
     </form>
 </div>
 {% endblock %}

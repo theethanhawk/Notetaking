@@ -3,8 +3,11 @@
 
 {% block content %}
 {% load static %}
+{% load custom_filters %}
 <div class="photo-section">
-    <img src="{% static 'images/philosophers.jpg' %}" alt="Featured Image">
+    <img id="featured-image" 
+         src="{% static 'images/philosophers.jpg' %}" 
+         alt="Featured Image">
     <a href="{% url 'notes_app:entry_create' %}" class="add-entry-btn">New Entry</a>
 </div>
 <!-- FILTER FUNCTION and NEW ENTRY -->
@@ -19,15 +22,15 @@
         <form method="get" class="filter-form">
             <div class="form-group">
                 <label for="id_tag">Tag</label>
-                {{ filter_form.tag }}
+                {{ filter_form.tag|add_class:"input-field" }}
             </div>
             <div class="form-group">
                 <label for="id_start_date">Start Date</label>
-                {{ filter_form.start_date }}
+                {{ filter_form.start_date|add_class:"input-field" }}
             </div>
             <div class="form-group">
                 <label for="id_end_date">End Date</label>
-                {{ filter_form.end_date }}
+                {{ filter_form.end_date|add_class:"input-field" }}
             </div>
             <button type="submit" class="filter-form">Filter</button>
         </form>
@@ -38,12 +41,11 @@
 <div class="grid-container">
     {% for entry in entries %}
         <div class="entry-detail-container">
-            <h3><a href="{% url 'notes_app:entry_detail' pk=entry.pk %}">{{ entry.content|truncatechars:100 }}</a></h3>
+            <h3><a href="{% url 'notes_app:entry_detail' pk=entry.pk %}" class="entry-text">{{ entry.content|truncatechars:100 }}</a></h3>
             <div class="entry-tags">
-                <h4>Tags</h4>
                 <ul>
                     {% for tag in entry.tags.all %}
-                        <li>{{ tag.name }}</li>
+                        <li>#{{ tag.name }}</li>
                     {% endfor %}
                 </ul>
             </div>

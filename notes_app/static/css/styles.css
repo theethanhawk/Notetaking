@@ -1,20 +1,67 @@
+/* Default Light Mode */
+:root {
+    --bg-image: url('/static/images/parchment.jpg');
+    --bg-color: #f8f6f665;
+    --text-color: #000000;
+    --navbar-bg: #000000;
+    --navbar-text: white;
+    --button-bg: #ffffff;
+    --button-text: rgb(0, 0, 0);
+    --input-bg: #ffffff;
+    --input-text: #000000;
+    --li-bg: #e9e9e9;
+    --li-text: #000000;
+}
+
+/* Apply styles to elements */
 body {
-    background-image: url('/static/images/parchment.jpg');
+    background-image: var(--bg-image);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Improved font family for readability */
-    background-color: #f8f6f665; /* Softer background color */
-    color: #000000; /* Darker text for better readability */
-    line-height: 1.6; /* Improved line height for readability */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* navbar styling */
+/* Default input field styles (light mode) */
+.input-field {
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+/* Default list item styles (light mode) */
+.entry-tags li {
+    background-color: var(--li-bg);
+    color: var(--li-text);
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+/* Default "Read More" link (light mode) */
+.entry-links {
+    color: #006320;
+    text-decoration: none;
+}
+.entry-links:hover {
+    text-decoration: underline;
+}
+
+/* Navbar styling */
 .navbar {
-    background-color: #000000; /* Or your chosen color */
-    color: white;
+    background-color: var(--navbar-bg);
+    color: var(--navbar-text);
     display: flex;
     justify-content: space-between;
     padding: 0.5rem 1rem;
@@ -30,16 +77,16 @@ body {
 .nav-left, .nav-center, .nav-right {
     flex: 1;
     display: flex;
-    justify-content: center; /* Center items by default */
+    justify-content: center;
     align-items: center;
 }
 
 .nav-left {
-    justify-content: flex-start; /* Align profile section to the left */
+    justify-content: flex-start;
 }
 
 .nav-right {
-    justify-content: flex-end; /* Align search bar to the right */
+    justify-content: flex-end;
 }
 
 /* Ensure the nav-center content is actually centered regardless of other content sizes */
@@ -52,17 +99,17 @@ body {
 
 .nav-item {
     margin-left: 20px;
-    color: #ffffff;
+    color: var(--navbar-text);
     text-decoration: none;
-    transition: color 0.3s ease; /* Smooth transition for hover effect */
+    transition: color 0.3s ease;
 }
 
 .navbar-nav .nav-item:hover {
-    color: #02d842; /* Highlight color on hover */
+    color: #02d842;
 }
 
 .new-filter-search {
-    background-color: #000000;
+    background-color: var(--navbar-bg);
     display: flex;
     justify-content: space-between;
     padding: 1rem 1rem;
@@ -74,10 +121,10 @@ body {
 }
 
 .profile-container {
-    position: relative; /* Needed for absolute positioning of dropdown */
+    position: relative;
 }
 
-/* profile styling */
+/* Profile styling */
 .profile-dropdown {
     position: absolute;
     background-color: #ffffff;
@@ -85,17 +132,17 @@ body {
     right: 0;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: none; /* Hide by default, show on hover or click */
-    z-index: 1000; /* Ensure dropdown is above other content */
+    display: none;
+    z-index: 1000;
 }
 
 .profile-icon img {
-    width: 40px; /* Adjust as needed */
-    height: 40px; /* Adjust as needed */
+    width: 40px;
+    height: 40px;
 }
 
 .profile-container:hover .profile-dropdown {
-    display: block; /* Show dropdown on hover */
+    display: block;
 }
 
 .profile-dropdown a {
@@ -109,7 +156,7 @@ body {
     background-color: #665964;
 }
 
-/* search styling */
+/* Search styling */
 .search-container form {
     display: flex;
     align-items: center;
@@ -123,10 +170,27 @@ body {
     width: 100%;
 }
 
+/* Default styling for search input (matches .entry-tags li and .entry-links) */
+.search-input {
+    background-color: var(--li-bg);
+    color: var(--li-text);
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+    width: 100%;
+}
+
+/* Dark Mode - Search Input */
+.dark-mode .search-input {
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #666;
+}
+
 .search-container button {
     padding: 0.5rem 1rem;
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
+    background-color: var(--button-bg);
+    color: var(--button-text);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -143,29 +207,29 @@ body {
     padding: 20px;
 }
 
-/* home page grid styling */
+/* Home page grid styling */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust minmax for card width */
-    gap: 20px; /* Space between cards */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
     padding: 20px;
 }
 
 /* Card Style */
 .entry-detail-container {
-    max-width: 800px; /* You might want to remove or increase this if cards are too small */
+    max-width: 800px;
     margin: auto;
     padding: 20px;
     border: 2px solid #ccc;
     text-decoration-color: #ffffff;
     border-radius: 8px;
     background-color: #3d3d3d9d;
-    box-shadow: 0 12px 24px 0 rgba(0,0,0,0.2); /* Add shadow for depth */
-    transition: 0.3s; /* Smooth transition for hover effect */
+    box-shadow: 0 12px 24px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
 }
 
 .entry-detail-container:hover {
-    box-shadow: 0 18px 26px 0 rgba(74, 168, 81, 0.2); /* More pronounced shadow on hover */
+    box-shadow: 0 18px 26px 0 rgba(74, 168, 81, 0.2);
 }
 
 /* Content and Images */
@@ -173,67 +237,42 @@ body {
     color: #333;
 }
 
-.entry-detail-container a {
-    color: #e9e9e9;
-}
-
 .entry-content, .entry-tags, .entry-images, .entry-links {
     margin-bottom: 20px;
 }
 
-.preformatted-text {
-    white-space: pre-wrap; /* Preserves whitespace and wraps text */
-    word-wrap: break-word; /* Ensures long words can break and wrap to the next line */
-    overflow-wrap: break-word; /* Alternative to word-wrap, use if more compatibility is needed */
-}
-.entry-tags ul, .entry-links ul {
+.entry-tags ul {
     list-style-type: none;
     padding: 0;
 }
 
-.entry-tags li, .entry-links li {
-    background-color: #e9e9e9;
-    display: inline-block;
-    padding: 5px 10px;
-    margin-right: 5px;
-    border-radius: 4px;
-    margin-bottom: 5px;
-}
-
-.entry-images .image {
-    display: inline-block;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    padding: 5px;
-    border-radius: 4px;
-}
-
+/* Image settings */
 .entry-images img {
-    width: 100%; /* Responsive to card width */
+    width: 100%;
     height: auto;
     display: block;
 }
 
-.entry-links a {
+/* "Read More" links */
+.entry-links {
     color: #006320;
     text-decoration: none;
 }
-
-.entry-links a:hover {
+.entry-links:hover {
     text-decoration: underline;
 }
 
+/* Sticky photo section */
 .photo-section {
     position: sticky;
     top: 0;
     z-index: 10;
-    background-color: #000000; /* Adjust as needed */
+    background-color: var(--navbar-bg);
 }
 
 .photo-section img {
     width: 100%;
-    max-height: 400px; /* Adjust based on your preference */
+    max-height: 400px;
     object-fit: cover;
 }
 
@@ -242,26 +281,61 @@ body {
     right: 20px;
     bottom: 20px;
     padding: 10px 20px;
-    background-color: #000000; /* Example button color */
+    background-color: var(--navbar-bg);
     color: white;
     text-decoration: none;
     border-radius: 5px;
 }
 
-/* Ensure .grid-container and other content have enough top margin or padding to not be overlapped by the sticky photo */
 .grid-container {
-    margin-top: 20px; /* Adjust as needed */
+    margin-top: 20px;
 }
 
-.form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* This makes sure that the container is at least the height of the viewport */
+/* Dark Mode Overrides */
+.dark-mode {
+    --bg-image: url('/static/images/darkparchment.jpg');
+    --bg-color: #1e1e1e;
+    --text-color: #ffffff;
+    --navbar-bg: #333;
+    --navbar-text: #e0e0e0;
+    --button-bg: #bb86fc;
+    --button-text: #ffffff;
 }
 
-.form-section {
-    width: 50%; /* Adjusts the width of the form. You can change this based on your preference */
-    margin: auto; /* This helps in further ensuring the form is centered */
-    padding: 20px; /* Adds some padding around the form for spacing */
+/* Dark Mode - Form Fields */
+.dark-mode .input-field {
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #666;
+}
+
+/* Dark Mode - List Items */
+.dark-mode .entry-tags li {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* Dark Mode - "Read More" Links */
+.dark-mode .entry-links {
+    color: #ffffff;
+}
+.dark-mode .entry-links:hover {
+    text-decoration: underline;
+    color:#000000;
+}
+
+.entry-text {
+    color: #ffffff;
+}
+
+.dark-mode .entry-text {
+    color:#000000;
+}
+
+.grid-container h4 {
+    color:#e0e0e0;
+}
+
+.dark-mode .grid-container h4 {
+    color:#000000
 }
